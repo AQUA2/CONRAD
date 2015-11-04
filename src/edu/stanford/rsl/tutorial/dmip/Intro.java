@@ -34,12 +34,27 @@ public class Intro {
 		//Define an image
 		//Hint: Import the package edu.stanford.rsl.conrad.data.numeric.Grid2D
 		//TODO
+	Grid2D image = new Grid2D(imageSizeX, imageSizeY);
+		
 	
 		//Draw a circle
 		int radius = 50;
 		//Set all pixels within the circle to 100
 		int insideVal = 100;
-	
+	for( int x=0 ; x<imageSizeX;x++) {
+		
+		
+	for (int y = 0; y < imageSizeY ; y++){
+		
+		if ( Math.pow(x- (imageSizeX/2.f), 2) + Math.pow(x - (imageSizeY)/2.f, 2) <Math.pow(radius,2)){
+			image.setAtIndex(x,y,insideVal);
+			
+		}else {
+			
+			image.setAtIndex(x, y, 0);
+		}
+		}
+	}
 		//TODO
 		//TODO
 		//TODO
@@ -55,7 +70,7 @@ public class Intro {
 		
 		
 		//Load an image from file
-		String filename = "D:/02_lectures/DMIP/exercises/2014/matlab_intro/mr12.dcm";
+		String filename = "/home/cip/2008/simaboeg/Reconstruction   //////D:/02_lectures/DMIP/exercises/2014/matlab_intro/mr12.dcm";
 		//TODO. Hint: Use IJ and ImageUtil
 		//mrImage.show();
 		
@@ -154,6 +169,7 @@ public class Intro {
 		
 		//Create 3x3 Matrix of 1's
 		SimpleMatrix Mones = new SimpleMatrix(3,3);
+		Mzeros.zeros();
 		//TODO
 		//Create a 3x3 Matrix of 0's
 		SimpleMatrix Mzeros = new SimpleMatrix(3,3);
@@ -163,22 +179,29 @@ public class Intro {
 		//TODO
 		
 		//Matrix multiplication
+		SimpleMAtrix ResMat = SimpleOperators.multiplyMatrixProd(Midentity, M2)
+		
 		//TODO
-		//System.out.println("M^T * M = " + ResMat.toString());
+		System.out.println("M^T * M = " + ResMat.toString());
 		
 
 		//Matrix vector multiplication
 		//TODO
 		//System.out.println("M * v1 = " + resVec.toString());
-		
+		SimpleVector resVec = SimpleOperators.multiply(M, v1);
 		
 		//Extract the last column vector from matrix M
 		//SimpleVector colVector = M.getCol(2);
 		//Extract the 1x2 subvector from the last column of matrix M
 		//TODO
-		//System.out.println("[m(0)(2); m(1)(2)] = " + subVector);
+		
+		
+		SimpleVector subVector = M.getSubCol(0,2,2);
+		System.out.println("[m(0)(2); m(1)(2)] = " + subVector);
 		
 		//Matrix elementwise multiplication
+		
+		Simple
 		//TODO
 		//System.out.println("M squared Elements: " + MsquaredElem.toString());
 		
@@ -230,6 +253,9 @@ public class Intro {
 		System.out.println("A = " + A.toString());
 		
 		//TODO SVD
+		DecompositionSVD svd = new DecompositionSVD(A);
+		
+		svd.cond()
 		
 		//print singular matrix
 		//System.out.println(svd.getS().toString());
